@@ -1,7 +1,1 @@
-<div class="viewer" (click)="onClickEvent($event)">
-  <adsk-forge-viewer [viewerOptions]="viewerOptions"
-  (onDocumentChanged)="documentChanged($event)" (onSelectionChanged)="selectionChanged($event)" (onItemLoaded)="itemLoadedEvent($event)"></adsk-forge-viewer>
-</div>
-<app-markup [position]='position2D' *ngIf='position2D'>
-
-</app-markup>
+<router-outlet></router-outlet>

@@ -2,19 +2,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ViewerModule } from 'ng2-adsk-forge-viewer';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
 import { MarkupComponent } from './markup/markup.component';
-import { App } from './app.routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     MarkupComponent
   ],
   imports: [
     BrowserModule,
     ViewerModule,
-    App.RoutingModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
