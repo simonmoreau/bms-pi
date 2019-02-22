@@ -4,6 +4,7 @@ import { ViewerModule } from 'ng2-adsk-forge-viewer';
 
 import { AppComponent } from './app.component';
 import { MarkupComponent } from './markup/markup.component';
+import { App } from './app.routing.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { MarkupComponent } from './markup/markup.component';
   ],
   imports: [
     BrowserModule,
-    ViewerModule
+    ViewerModule,
+    App.RoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
