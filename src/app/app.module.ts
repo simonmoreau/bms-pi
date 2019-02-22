@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MarkupComponent } from './markup/markup.component';
+import { GraphComponent } from './graph/graph.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    MarkupComponent
+    MarkupComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,
