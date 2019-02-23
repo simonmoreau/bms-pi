@@ -9,6 +9,7 @@ import { MarkupComponent } from './markup/markup.component';
 import { GraphComponent } from './graph/graph.component';
 import { AppService } from './app.service';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { ViewerComponent } from './viewer/viewer.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { GoogleChartsModule } from 'angular-google-charts';
     AppComponent,
     HomeComponent,
     MarkupComponent,
-    GraphComponent
+    GraphComponent,
+    ViewerComponent
   ],
   imports: [
     BrowserModule,

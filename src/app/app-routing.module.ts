@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { GraphComponent } from './graph/graph.component';
+import { ViewerComponent } from './viewer/viewer.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'graph', component: GraphComponent },
+  { path: 'viewer', component: ViewerComponent },
 ];
 
 @NgModule({
