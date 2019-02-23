@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AppService } from '../app.service';
 import { Reading } from '../models/reading.models';
 
@@ -17,6 +17,8 @@ export class GraphComponent implements OnInit {
   resize = true;
   errorMessage: string;
   displayed = false;
+
+  @Input() sensorId: string;
 
   constructor(private appService: AppService) { }
 
@@ -39,7 +41,7 @@ export class GraphComponent implements OnInit {
     this.columnNames = ['Date', 'Temperature', 'Humidity'];
     this.data = [];
 
-    this.appService.getPastValues('sensor1').subscribe(
+    this.appService.getPastValues(this.sensorId).subscribe(
       readings => {
         this.data = this.GetAveragePerHour(readings);
 

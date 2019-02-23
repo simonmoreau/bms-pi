@@ -1,18 +1,70 @@
+.markup {
+    position: absolute;
+}
+
 .card {
-    width: 300px;
-    height: 200px;
-    position: relative;
+    width: 140px;
+    height: 125px;
+    position: absolute;
     background-color: rgba(34,34,34,.94);
     border-radius:5px;
     box-shadow:0 3px 5px rgba(0,0,0,.3);
     opacity:1;
-    right: 136px;
-    bottom: 240px;
+    bottom: 100%;
+    left: 50%; 
+    margin-left: -70px;
+    visibility: hidden;
 }
 
-.markups {
-    position: absolute;
+.point {
+    position: relative;
     z-index: 1;
     width: 0px;
     height: 0px;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.point:hover .card {
+    visibility: visible;
+  }
+
+.card .title {
+    color: #fff;
+    background-color: rgba(34,34,34,.94);
+    border-bottom: 1px solid rgba(34,34,34,.8);
+    padding: 11px 0 11px 14px;
+    border-radius: 5px 5px 0 0;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 27px;
+    border: none;
+    resize: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+    cursor: move;
+    position: relative;
+    z-index: 1;
+    font-family: ArtifaktElement,Helvetica Neue,Segoe UI Semilight,sans-serif;
+}
+
+.card .content {
+    color: #fff;
+    padding: 11px 0 11px 14px;
+    border-radius: 5px 5px 0 0;
+    font-weight: 500;
+    font-size: 12px;
+    vertical-align: middle;
+    line-height: 27px;
+    border: none;
+    resize: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+    cursor: move;
+    position: relative;
+    z-index: 1;
+    font-family: ArtifaktElement,Helvetica Neue,Segoe UI Semilight,sans-serif;
 }

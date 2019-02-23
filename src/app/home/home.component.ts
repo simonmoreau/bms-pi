@@ -30,7 +30,8 @@ export class HomeComponent implements OnInit {
   public viewerOptions: ViewerOptions;
   public documentId: string;
   public viewer3d: Autodesk.Viewing.Viewer3D;
-  public position2D: THREE.Vector3;
+  public position2Dsensor2: THREE.Vector3;
+  public position2Dsensor1: THREE.Vector3;
   public errorMessage: string;
 
   constructor(private appService: AppService) { }
@@ -82,11 +83,12 @@ export class HomeComponent implements OnInit {
 
 
       // convert 3D position to 2D screen coordination
-      const point = this.viewer3d.worldToClient(new THREE.Vector3(9.969990863926704, -4.275324379352721, -3.4448819160461426));
+      const point2 = this.viewer3d.worldToClient(new THREE.Vector3(9.969990863926704, -4.275324379352721, -3.4448819160461426));
+      this.position2Dsensor2 = new THREE.Vector3(point2.x, point2.y, point2.z);
 
-      this.position2D = new THREE.Vector3(point.x, point.y, point.z);
-
-      console.log(this.position2D);
+      // convert 3D position to 2D screen coordination
+      const point1 = this.viewer3d.worldToClient(new THREE.Vector3(-5.212462642869166, -9.990753140834208, -3.4448819160461426));
+      this.position2Dsensor1 = new THREE.Vector3(point1.x, point1.y, point1.z);
 
     });
   }

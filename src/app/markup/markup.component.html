@@ -1,10 +1,20 @@
-<div class="markups" [ngStyle]="{'left.px':positionLeft,'top.px':positionTop}">
-  <div (click)='displayPanel()'>
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" >
-        <circle cx="14" cy="14" r="12" stroke="#FF0000" strokeWidth="3" fill="#FF8888" fillOpacity="0.6"/>
-       </svg>
-  </div>
-
-   <div class="card" *ngIf='isPanelDisplayed'>
-   </div>
+<div class="markup" [ngStyle]="{'left.px':positionLeft,'top.px':positionTop}">
+    <div class="point">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+          <circle cx="14" cy="14" r="12" stroke="#FF0000" strokeWidth="3" fill="#FF8888" fillOpacity="0.6" />
+        </svg>
+        <div class="card">
+          <div class="title">
+            {{sensorId}}
+          </div>
+          <div class="content">
+            <div>
+              Temperature : {{temperature}}°C
+            </div>
+            <div>
+              Humidity : {{humidity}} %
+            </div>
+          </div>
+        </div>
+      </div>
 </div>
