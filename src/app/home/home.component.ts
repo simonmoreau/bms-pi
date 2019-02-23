@@ -7,13 +7,14 @@ import {
   Extension,
   ItemLoadedEvent,
 } from 'ng2-adsk-forge-viewer';
+import { AppService } from '../app.service';
 
 // tslint:disable-next-line:prefer-const
 declare const THREE: any;
 
 // Insert a token and a document URN here
 // Then refresh the app
-export const ACCESS_TOKEN = 'eyJhbGciOiJIUzI1NiIsImtpZCI6Imp3dF9zeW1tZXRyaWNfa2V5In0.eyJjbGllbnRfaWQiOiJlYVNTclN0bWo0SXVOZ1AzR1hhSlRxYnF0YjAwQWxURiIsImV4cCI6MTU1MDg3MDU0NCwic2NvcGUiOlsidmlld2FibGVzOnJlYWQiXSwiYXVkIjoiaHR0cHM6Ly9hdXRvZGVzay5jb20vYXVkL2p3dGV4cDYwIiwianRpIjoiVEhGZVEyZE5SbHAxSTE2Z0JWNkx4UDVId2lrVGpMR2lyTG1FOU03aGl3bHh0bUVzREJCUG9GS0RMcFpFTnFsdyJ9.GqTpLRj7b5r-WTgMkWFPmCqGjujpNxLcNbp7Ik3GO9A';
+export const ACCESS_TOKEN = 'eyJhbGciOiJIUzI1NiIsImtpZCI6Imp3dF9zeW1tZXRyaWNfa2V5In0.eyJjbGllbnRfaWQiOiJlYVNTclN0bWo0SXVOZ1AzR1hhSlRxYnF0YjAwQWxURiIsImV4cCI6MTU1MDk1MDkyOSwic2NvcGUiOlsiZGF0YTp3cml0ZSIsInZpZXdhYmxlczpyZWFkIiwiZGF0YTpyZWFkIiwiYnVja2V0OnJlYWQiXSwiYXVkIjoiaHR0cHM6Ly9hdXRvZGVzay5jb20vYXVkL2p3dGV4cDYwIiwianRpIjoiYVJQNzF5bEVIVVNrNUxFRGc4elkzbGpOZThxTnFmRUk0Qk9LRXJlWGZsdkNMNEdDZXBINEp1RGpKa2pqT2ZXaiJ9._IrnAH_gO4MKeenQ9njcee5stBNZnKG_29l7NDsKm30';
 export const DOCUMENT_URN = 'dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6YXJtb3JpcXVlLzIwQXJtb3JpcXVlMi5ydnQ';
 
 @Component({
@@ -30,6 +31,9 @@ export class HomeComponent implements OnInit {
   public documentId: string;
   public viewer3d: Autodesk.Viewing.Viewer3D;
   public position2D: THREE.Vector3;
+  public errorMessage: string;
+
+  constructor(private appService: AppService) { }
 
   public ngOnInit() {
     this.viewerOptions = {
@@ -37,7 +41,12 @@ export class HomeComponent implements OnInit {
         env: 'AutodeskProduction',
         getAccessToken: (onGetAccessToken: (token: string, expire: number) => void) => {
           const expireTimeSeconds = 60 * 30;
-          onGetAccessToken(ACCESS_TOKEN, expireTimeSeconds);
+          this.appService.getToken().subscribe(
+            token => {
+              onGetAccessToken(token.access_token, expireTimeSeconds);
+            },
+            error => (this.errorMessage = error)
+          );
         },
       },
       viewerConfig: {

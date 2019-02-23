@@ -7,7 +7,9 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MarkupComponent } from './markup/markup.component';
 import { GraphComponent } from './graph/graph.component';
+import { AppService } from './app.service';
 import { GoogleChartsModule } from 'angular-google-charts';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,7 @@ import { GoogleChartsModule } from 'angular-google-charts';
     AppRoutingModule,
     GoogleChartsModule.forRoot()
   ],
-  providers: [],
+  providers: [AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

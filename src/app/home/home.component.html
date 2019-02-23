@@ -1,7 +1,12 @@
-<div class="viewer" (click)="onClickEvent($event)">
-  <adsk-forge-viewer [viewerOptions]="viewerOptions"
-  (onDocumentChanged)="documentChanged($event)" (onSelectionChanged)="selectionChanged($event)" (onItemLoaded)="itemLoadedEvent($event)"></adsk-forge-viewer>
+<div>
+  <div class="viewer" (click)="onClickEvent($event)">
+    <adsk-forge-viewer [viewerOptions]="viewerOptions"
+    (onDocumentChanged)="documentChanged($event)" (onSelectionChanged)="selectionChanged($event)" (onItemLoaded)="itemLoadedEvent($event)"></adsk-forge-viewer>
+  </div>
+  <app-markup [position]='position2D' *ngIf='position2D'></app-markup>
 </div>
-<app-markup [position]='position2D' *ngIf='position2D'>
 
-</app-markup>
+<h1>Sensor 1</h1>
+<app-graph></app-graph>
+<h1>Sensor 2</h1>
+<app-graph></app-graph>
