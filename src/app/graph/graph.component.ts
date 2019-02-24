@@ -41,7 +41,14 @@ export class GraphComponent implements OnInit {
     this.columnNames = ['Date', 'Temperature', 'Humidity'];
     this.data = [];
 
-    this.appService.getPastValues(this.sensorId).subscribe(
+    let sensor: string;
+    if (this.sensorId) {
+      sensor = this.sensorId;
+    } else {
+      sensor = 'sensor1';
+    }
+
+    this.appService.getPastValues(sensor).subscribe(
       readings => {
         this.data = this.GetAveragePerHour(readings);
 

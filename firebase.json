@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "public": "dist/BMSPi",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

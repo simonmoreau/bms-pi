@@ -1,7 +1,10 @@
-<google-chart style="width: 100%;height: 600px;" *ngIf="displayed"
-  [dynamicResize]="resize"
-  [type]="type"
-  [data]= "data"
-  [columnNames]="columnNames"
-  [options]="options">
+<h2 *ngIf='!displayed'>
+  Loading ...
+</h2>
+<google-chart style="width: 100%;height: 600px;" *ngIf="displayed" 
+ [dynamicResize]="resize"
+ [type]="type" 
+ [data]="data"
+ [columnNames]="columnNames" 
+ [options]="options">
 </google-chart>
