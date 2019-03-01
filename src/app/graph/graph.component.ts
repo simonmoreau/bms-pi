@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AppService } from '../app.service';
 import { Reading } from '../models/reading.models';
+import { GoogleChartComponent } from 'angular-google-charts';
+import { ScriptLoaderService } from 'angular-google-charts';
+import { GoogleChartPackagesHelper } from 'angular-google-charts';
 
 @Component({
   selector: 'app-graph',
@@ -17,46 +20,70 @@ export class GraphComponent implements OnInit {
   resize = true;
   errorMessage: string;
   displayed = false;
+  myFormatter: any;
 
   @Input() sensorId: string;
 
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService, private loaderService: ScriptLoaderService) { }
 
   ngOnInit() {
 
-    this.options = {
+    this.loaderService.onReady.subscribe(() => {
 
-      series: {
-        0: { targetAxisIndex: 0 },
-        1: { targetAxisIndex: 1 }
-      },
-      vAxes: {
-        // Adds titles to each axis.
-        0: { title: 'Temperature (°C)', format: '##.# °C' },
-        1: { title: 'Humidity (%)', format: '# %' }
-      },
-      colors: ['#dc3912', '#3366cc']
-    };
+      this.type = GoogleChartPackagesHelper.getPackageForChartName('LineChart');
 
-    this.columnNames = ['Date', 'Temperature', 'Humidity'];
-    this.data = [];
+      this.loaderService.loadChartPackages([this.type]).subscribe(() => {
+        // Start creating your chart now
+        // Example:
+        const formatter = new google.visualization.BarFormat();
 
-    let sensor: string;
-    if (this.sensorId) {
-      sensor = this.sensorId;
-    } else {
-      sensor = 'sensor1';
-    }
+        // Formats the columns
+        this.myFormatter = [
+          { formatter: new google.visualization.NumberFormat({ suffix: ' °C' }), colIndex: 1 },
+          { formatter: new google.visualization.NumberFormat({ pattern: '# %' }), colIndex: 2 }
+        ];
 
-    this.appService.getPastValues(sensor).subscribe(
-      readings => {
-        this.data = this.GetAveragePerHour(readings);
+        this.options = {
 
-        this.displayed = true;
+          series: {
+            0: { targetAxisIndex: 0 },
+            1: { targetAxisIndex: 1 }
+          },
+          vAxes: {
+            // Adds titles to each axis.
+            0: { title: 'Temperature (°C)', format: '##.# °C' },
+            1: { title: 'Humidity (%)', format: '# %' }
+          },
+          colors: ['#dc3912', '#3366cc']
+        };
 
-      },
-      error => (this.errorMessage = error)
-    );
+        this.columnNames = ['Date', 'Temperature', 'Humidity'];
+        this.data = [];
+
+
+
+        let sensor: string;
+        if (this.sensorId) {
+          sensor = this.sensorId;
+        } else {
+          sensor = 'sensor1';
+        }
+
+        this.appService.getPastValues(sensor).subscribe(
+          readings => {
+            this.data = this.GetAveragePerHour(readings);
+
+            this.displayed = true;
+
+          },
+          error => (this.errorMessage = error)
+        );
+      });
+    });
+
+
+
+
 
     // let formatMS = new google.visualization.NumberFormat({
     //   pattern: '#.# °C'
