@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AppService } from '../app.service';
 import { Reading } from '../models/reading.models';
-import { GoogleChartComponent } from 'angular-google-charts';
 import { ScriptLoaderService } from 'angular-google-charts';
 import { GoogleChartPackagesHelper } from 'angular-google-charts';
 
@@ -24,7 +24,10 @@ export class GraphComponent implements OnInit {
 
   @Input() sensorId: string;
 
-  constructor(private appService: AppService, private loaderService: ScriptLoaderService) { }
+  constructor(
+    private appService: AppService,
+    private loaderService: ScriptLoaderService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
 
@@ -63,7 +66,9 @@ export class GraphComponent implements OnInit {
 
 
         let sensor: string;
-        if (this.sensorId) {
+        if (this.route.snapshot.paramMap.get('id')) {
+          sensor = this.route.snapshot.paramMap.get('id');
+        } else if (this.sensorId) {
           sensor = this.sensorId;
         } else {
           sensor = 'sensor1';
